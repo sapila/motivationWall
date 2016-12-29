@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-// Load  Routes
-require('./routes/routes')(app);
-
 // Load mongose Start Connection
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/motivationwall');
@@ -25,6 +22,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Load  Routes
+require('./routes/routes')(app);
 
 
 // error handler
