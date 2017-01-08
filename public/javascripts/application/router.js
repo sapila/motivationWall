@@ -3,15 +3,16 @@ define([
 	'underscore',
 	'backbone',
 	'views/index',
+	'collections/QuoteCollection'
 	], 
-	function($, _, Backbone, indexView) {
+	function($, _, Backbone, indexView, QuoteCollection) {
 		var AppRouter = Backbone.Router.extend({
 			routes: {
-				'here': 'index'
+				'': 'index'
 			},
 
 			index: function() {
-				indexView.render();
+				indexView.render();	
 			}
 		});
 
