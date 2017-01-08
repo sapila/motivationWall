@@ -16,7 +16,7 @@ define([
 
 				//Set interval for rendering next
 				this.timer = new Timer({
-					interval: 1000, method:this.renderNext
+					interval: 2000, method:this.renderNext.bind(this)
 				});
 
 				this.collection = new QuoteCollection();
@@ -39,10 +39,10 @@ define([
 				$(this.el).html(html);
 			},
 			renderNext: function(){
-				console.log('rext')
-				// this.index;
-				// var quote = this.collection.at(this.index);
-				// this.renderQuote(quote);
+				this.index++;
+				var quote = this.collection.at(this.index);
+				this.renderQuote(quote);
+				
 			}
 		});
 		
