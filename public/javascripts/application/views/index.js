@@ -3,12 +3,14 @@ define([
 	'underscore',
 	'backbone',
 	'collections/QuoteCollection',
-	'models/Timer'
-	], function($, _, Backbone, QuoteCollection, Timer) {
+	'models/Timer',
+	'text!templates/QuoteTemplate.html',
+	'fitText'
+	], function($, _, Backbone, QuoteCollection, Timer, QuoteTemplate) {
 		var indexView = Backbone.View.extend({
 			el: '#main',
 
-			template: _.template('test123 <%= text %> , <%= author %>'),
+			template: _.template(QuoteTemplate),
 
 			initialize: function() {
 				//set the index of the collection item that will be showed
@@ -29,6 +31,7 @@ define([
 					var quote = this.collection.at(this.index);
 					this.renderQuote(quote);
 					this.timer.start();
+					$("#quote").fitText(1.2);
 				}
 			},
 			renderQuote: function(quote) {
@@ -42,7 +45,7 @@ define([
 				this.index++;
 				var quote = this.collection.at(this.index);
 				this.renderQuote(quote);
-				
+				$("#quote").fitText(1.2);
 			}
 		});
 		
