@@ -31,7 +31,7 @@ define([
 					var quote = this.collection.at(this.index);
 					this.renderQuote(quote);
 					this.timer.start();
-					$("#quote").fitText(1.2);
+					$("#quote").fitText(1.5);
 				}
 			},
 			renderQuote: function(quote) {
@@ -45,7 +45,7 @@ define([
 				this.index++;
 				var quote = this.collection.at(this.index);
 				this.renderQuote(quote);
-				$("#quote").fitText(1.2);
+				$("#quote").fitText(1.5);
 			}
 		});
 		
