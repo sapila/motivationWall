@@ -5,8 +5,14 @@ define([
 	'collections/QuoteCollection',
 	'models/Timer',
 	'text!templates/QuoteTemplate.html',
+	'library/QuoteFontCalculator',
 	'fitText'
-	], function($, _, Backbone, QuoteCollection, Timer, QuoteTemplate) {
+	], function($, _, Backbone, 
+		 QuoteCollection,
+		 Timer,
+		 QuoteTemplate,
+		 QuoteFontCalculator
+		) {
 		var indexView = Backbone.View.extend({
 			el: '#main',
 
@@ -26,14 +32,21 @@ define([
 				this.collection.bind("reset", _.bind(this.render, this));
 				this.collection.fetch();
 			},
+		    /**
+			 * View Render 
+			 **/
 			render: function() {
 				if (this.collection.length > 0) {
 					var quote = this.collection.at(this.index);
 					this.renderQuote(quote);
+					// Start timer for next item render
 					this.timer.start();
-					$("#quote").fitText(1.5);
+					$("#quote").fitText(QuoteFontCalculator.getFontSize(quote));
 				}
 			},
+			/**
+			 * Render Single quote 
+			 **/
 			renderQuote: function(quote) {
 				var html = this.template({
 					text:quote.get('text'),
@@ -41,11 +54,15 @@ define([
 				});
 				$(this.el).html(html);
 			},
+			/**
+			 * Render Next Quote
+			 **/
 			renderNext: function(){
 				this.index++;
 				var quote = this.collection.at(this.index);
-				this.renderQuote(quote);
-				$("#quote").fitText(1.5);
+				this.renderQuote(quote);					console.log(QuoteFontCalculator.getFontSize(quote))
+
+				$("#quote").fitText(QuoteFontCalculator.getFontSize(quote));
 			}
 		});
 		
